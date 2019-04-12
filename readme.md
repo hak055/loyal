@@ -2,6 +2,8 @@
 
 . composer install
 
+. npm install (Node.js)
+
 . настроить .env файл
 
 . php artisan key:generate
