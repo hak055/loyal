@@ -1,4 +1,6 @@
 <?php
+use App\Notifications\InvoicePaid;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +14,10 @@
 */
 
 Route::get('/', function () {
+
+	// $user  = user::find(1);
+	User::find(1)->notify(new InvoicePaid);
+
     return view('welcome');
 });
 
@@ -21,3 +27,9 @@ Route::get('/tariff', 'TariffController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('maskAsRead', function(){
+	auth()->user()->unreadNotifications->markAsRead();
+
+	return redirect('/tariff');
+})->name('markRead');
